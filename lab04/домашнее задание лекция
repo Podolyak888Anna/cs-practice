@@ -1,0 +1,14 @@
+n = int(input("n = "))
+
+if n < 2:       #проверка на числа, которые не явл. простыми(1,0,<0)
+    flag: False 
+else:
+    k = 2       #проверка, делится ли число на n, начинаем с двойки
+    flag = True
+
+    while k * k <= n and flag: 
+        if n % k == 0:
+            flag = False
+        k = k + 1
+
+print(flag)
