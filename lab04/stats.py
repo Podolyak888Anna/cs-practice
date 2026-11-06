@@ -24,3 +24,17 @@ def read_valid(lines):
         except ValueError:
             continue 
     return valid_records 
+
+def average_by_city(records):
+    total = {}
+    count = {}
+    for rec in records: 
+        city = rec["city"]
+        temp = rec["temp"]
+        total[city] = total.get(city, 0) + temp
+        count[city] = count.get(city, 0) + 1
+    
+    averages = {}
+    for city in total:
+        averages[city] = round(total[city] / count[city], 1)
+    return averages 
