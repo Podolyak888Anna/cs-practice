@@ -11,3 +11,16 @@ def parse_record(line: str)
     
     temp_float = float(temp)
     return {"city": city, "temp": temp_float, "date": date} 
+
+def read_valid(lines): 
+    valid_records = []
+    for line in lines:
+        if not line.strip:
+            continue 
+
+        try:
+            record = parse_record(line)
+            valid_records.append(record)
+        except ValueError:
+            continue 
+    return valid_records 
