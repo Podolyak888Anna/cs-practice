@@ -22,7 +22,7 @@ def parse_event(line):
 
 
 def count_levels(lines):
-    counts = {"DEBUG": 0, "INFO": 0, "WARNING": 0, "ERROR": 0, "BROKEN": 0}
+    counts = {}
     
     for line in lines:
         if not line.strip():
@@ -31,12 +31,18 @@ def count_levels(lines):
         try:
             event = parse_event(line)
             level = event["level"]
+            
             if level in counts:
                 counts[level] += 1
+            else:
+                counts[level] = 1
+                
         except ValueError:
-            # Если вылезла ошибка (BROKEN)
-            counts["BROKEN"] += 1
-            
+            if "BROKEN" in counts:
+                counts["BROKEN"] += 1
+            else:
+                counts["BROKEN"] = 1
+                
     return counts
 
 
