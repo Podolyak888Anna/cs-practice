@@ -1,24 +1,18 @@
 def parse_event(line):
     parts = line.strip().split()
     
-    if len(parts) >= 3:
-        time = parts[0]
-        level = parts[1]
-        message = ' '.join(parts[2:])
+    if len(parts) < 3:
+        raise ValueError("Недостаточно частей в строке")
         
-        valid_levels = {"DEBUG", "INFO", "WARNING", "ERROR"}
-        if level not in valid_levels:
-            raise ValueError("Неизвестный уровень")
-            
-        return {"time": time, "level": level, "message": message}
-    elif len(parts) == 2:
-        time = parts[0]
-        level = parts[1]
-        if level not in {"DEBUG", "INFO", "WARNING", "ERROR"}:
-            raise ValueError("Неизвестный уровень")
-        return {"time": time, "level": level, "message": ""}
-    else:
-        raise ValueError("Неверный формат строки")
+    time = parts[0]
+    level = parts[1]
+    message = ' '.join(parts[2:])
+    
+    valid_levels = {"DEBUG", "INFO", "WARNING", "ERROR"}
+    if level not in valid_levels:
+        raise ValueError("Неизвестный уровень")
+        
+    return {"time": time, "level": level, "message": message}
 
 
 def count_levels(lines):
